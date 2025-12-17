@@ -17,12 +17,14 @@ app.add_middleware(
     allow_headers=["*"],
 ) 
 
-Songs_data = pd.read_csv("spotify_millsongdata (1).csv")
+Songs_data = pd.read_csv("spotify_millsongdata (1).csv",
+    engine='python',
+    on_bad_lines='skip')
 
 selected_features = ["artist", "song", "link", "text"]
 
 for feature in selected_features :
-  Songs_data[feature] = Songs_data[feature].fillna("")
+    Songs_data[feature] = Songs_data[feature].fillna("")
 
 combined_features = Songs_data['artist']+' '+ Songs_data['song']+' '+ Songs_data['link']+' '+ Songs_data['text']
 
